@@ -20,7 +20,7 @@ class MinutesController < ApplicationController
 
     @response['id'] = @picture.id
     @response['time'] = @minute.time
-    @response['path'] = @picture.picture.url
+    @response['path'] = "http://piceachminute.multimediatechnology.at" + @picture.picture.url
     @response['top_x'] = @picture.top_x
     @response['top_y'] = @picture.top_y
     @response['bottom_x'] = @picture.bottom_x
