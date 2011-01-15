@@ -10,7 +10,11 @@ class MinutesController < ApplicationController
   def random
     @minute = Minute.find_by_time(params[:id])
 
-    @picture = @minute.pictures.first(:order => 'RANDOM()')
+    @pictures = @minute.pictures
+
+    @picture = @pictures[rand(@pictures.length)]
+
+    #@picture = @minute.pictures.first(:order => 'RANDOM()')
 
     respond_to do |format|
       format.html
