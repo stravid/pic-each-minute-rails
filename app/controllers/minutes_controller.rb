@@ -17,7 +17,10 @@ class MinutesController < ApplicationController
     #@picture = @minute.pictures.first(:order => 'RANDOM()')
 
     respond_to do |format|
-      format.html
+      format.html do 
+        render :partial => "minutes/random.json"
+      end
+      
       format.json do 
         render :partial => "minutes/random.json"
       end
