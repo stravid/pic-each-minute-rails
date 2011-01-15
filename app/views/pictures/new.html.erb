@@ -1,0 +1,21 @@
+<h1>Upload Picture</h1>
+
+<%= form_for @picture, :html => { :multipart => true } do |form| %>
+  <p>
+    <%= form.file_field :picture %>
+  </p>
+  <p>
+    <%= text_field_tag :time %>
+  </p>
+  <p>
+    <%= form.label :uploader %>
+    <%= form.text_field :uploader %>
+  </p>
+  <p>
+    <%= form.label :location %>
+    <%= form.text_field :location %>
+  </p>
+  <p>
+    <%= form.submit "Save" %>
+  </p>
+<% end %>

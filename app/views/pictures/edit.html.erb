@@ -1,0 +1,139 @@
+<h1>Specificate Picture</h1>
+
+<%= raw '<img src="' + @picture.picture.url + '" id="image" />' %>
+
+<%= raw '<div style="background-image: url(' + @picture.picture.url + ')" id="canvas" /></div>' %>
+
+<%= form_for @picture do |form| %>
+  <p>
+    <%= text_field_tag :time, @picture.minute.time %>
+  </p>
+  <p>
+    <%= form.label :uploader %>
+    <%= form.text_field :uploader %>
+  </p>
+  <p>
+    <%= form.label :location %>
+    <%= form.text_field :location %>
+  </p>
+  <p>
+    <%= form.label :top_x %>
+    <%= form.text_field :top_x %>
+  </p>
+  <p>
+    <%= form.label :top_y %>
+    <%= form.text_field :top_y %>
+  </p>
+  <p>
+    <%= form.label :bottom_x %>
+    <%= form.text_field :bottom_x %>
+  </p>
+  <p>
+    <%= form.label :bottom_y %>
+    <%= form.text_field :bottom_y %>
+  </p>
+  <p>
+    <%= form.submit "Save" %>
+  </p>
+<% end %>
+
+<style>
+.hide {
+  display: none;
+}
+
+img {
+  margin-left: 200px;
+}
+
+div {
+  background-repeat: no-repeat;
+}
+</style>
+
+<script src="/javascripts/raphael.js"></script>
+<script>
+  var domImage = document.getElementById('image'),
+      domCanvas = document.getElementById('canvas'),
+      domTopX = document.getElementById('picture_top_x'),
+      domTopY = document.getElementById('picture_top_y'),
+      domBottomX = document.getElementById('picture_bottom_x'),
+      domBottomY = document.getElementById('picture_bottom_y');
+
+  domImage.onload = function() {
+    var paper = Raphael('canvas', domImage.width, domImage.height),
+        points = [],
+        rectangle;
+
+    if (parseInt(domTopX.value, 10)) {
+      var topX = parseInt(domTopX.value, 10),
+          topY = parseInt(domTopY.value, 10),
+          bottomX = parseInt(domBottomX.value, 10),
+          bottomY = parseInt(domBottomY.value, 10);
+
+      points.push(paper.circle(topX, topY, 7).attr({fill: '#fff', stroke: '#fff'}));
+      points[0].ID = 0;
+      points.push(paper.circle(bottomX, topY, 7).attr({fill: '#fff', stroke: '#fff'}));
+      points[1].ID = 1;
+      points.push(paper.circle(bottomX, bottomY, 7).attr({fill: '#fff', stroke: '#fff'}));
+      points[2].ID = 2;
+      points.push(paper.circle(topX, bottomY, 7).attr({fill: '#fff', stroke: '#fff'}));
+      points[3].ID = 3;
+
+      rectangle = paper.rect(topX, topY, bottomX - topX, bottomY - topY).attr({stroke: '#fff', opacity: 0.5, 'stroke-width': 2});
+    } else {
+      points.push(paper.circle(0, 0, 7).attr({fill: '#fff', stroke: '#fff'}));
+      points[0].ID = 0;
+      points.push(paper.circle(domImage.width, 0, 7).attr({fill: '#fff', stroke: '#fff'}));
+      points[1].ID = 1;
+      points.push(paper.circle(domImage.width, domImage.height, 7).attr({fill: '#fff', stroke: '#fff'}));
+      points[2].ID = 2;
+      points.push(paper.circle(0, domImage.height, 7).attr({fill: '#fff', stroke: '#fff'}));
+      points[3].ID = 3;
+
+      rectangle = paper.rect(0, 0, domImage.width, domImage.height).attr({stroke: '#fff', opacity: 0.5, 'stroke-width': 2});
+    }
+
+    var start = function() {
+      this.ox = this.attr("cx");
+      this.oy = this.attr("cy");
+      this.attr({opacity: 0.5});
+    };
+
+    var move = function(deltaX, deltaY) {
+      this.attr({cx: this.ox + deltaX, cy: this.oy + deltaY});
+
+      if (this.ID == 0) {
+        points[3].attr({cx: this.attr('cx')});
+        points[1].attr({cy: this.attr('cy')});
+      } else if (this.ID == 1) {
+        points[2].attr({cx: this.attr('cx')});
+        points[0].attr({cy: this.attr('cy')});
+      } else if (this.ID == 2) {
+        points[1].attr({cx: this.attr('cx')});
+        points[3].attr({cy: this.attr('cy')});
+      } else if (this.ID == 3) {
+        points[0].attr({cx: this.attr('cx')});
+        points[2].attr({cy: this.attr('cy')});
+      }
+
+      rectangle.attr({x: points[0].attr('cx'), y: points[0].attr('cy'), width: points[2].attr('cx') - points[0].attr('cx'), height: points[2].attr('cy') - points[0].attr('cy')});
+
+      domTopX.value = points[0].attr('cx');
+      domTopY.value = points[0].attr('cy');
+      domBottomX.value = points[2].attr('cx');
+      domBottomY.value = points[2].attr('cy');
+    };
+
+    var end = function() {
+      this.attr({opacity: 1});
+    };
+
+    for (var i = 0; i < points.length; i++) {
+      points[i].drag(move, start, end);
+    }
+
+
+    domImage.className = 'hide';
+  };
+</script>

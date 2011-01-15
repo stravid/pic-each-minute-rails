@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  minute_id: 
+  blames: 
+  top_x: 
+  top_y: 
+  bottom_x: 
+  bottom_y: 
+  uploader: 
+  location: MyString
+
+two:
+  minute_id: 
+  blames: 
+  top_x: 
+  top_y: 
+  bottom_x: 
+  bottom_y: 
+  uploader: 
+  location: MyString

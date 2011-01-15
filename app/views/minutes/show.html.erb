@@ -1,0 +1,12 @@
+Time: <%= @minute.time %>
+<br />
+id: <%= @minute.id %>
+
+<ul>
+<% @minute.pictures.each do |picture| %>
+  <li>
+    <%= link_to picture.picture.url, picture_path(picture) %>
+    (<%= link_to 'edit', edit_picture_path(picture) %>)
+  </li>
+<% end %>
+</ul>

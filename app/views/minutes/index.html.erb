@@ -1,0 +1,10 @@
+<h1>List of all Minutes</h1>
+<p>
+  <%= link_to "upload picture", new_picture_path %>
+</p>
+
+<ul>
+<% @minutes.each do |minute| %>
+  <li><%= link_to minute.time, minute %></li>
+<% end %>
+</ul>

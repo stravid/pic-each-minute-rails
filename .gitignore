@@ -1,0 +1,16 @@
+.bundle
+db/*.sqlite3
+log/*.log
+tmp/**/*
+
+config/database.yml
+*.swp
+doc/api
+doc/app
+db/*.sqlite3
+
+public/system
+
+deploy.rb
+
+Capfile
