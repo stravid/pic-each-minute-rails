@@ -16,11 +16,23 @@ class MinutesController < ApplicationController
 
     #@picture = @minute.pictures.first(:order => 'RANDOM()')
 
+    @response = Hash.new
+
+    @response['id'] = @picture.id
+    @response['time'] = @minute.time
+    @response['path'] = @picture.picture.url
+    @response['top_x'] = @picture.top_x
+    @response['top_y'] = @picture.top_y
+    @response['bottom_x'] = @picture.bottom_x
+    @response['bottom_y'] = @picture.bottom_y
+    @response['location'] = @picture.location
+    @response['uploader'] = @picture.uploader
+
     respond_to do |format|
       format.html do 
         render :partial => "minutes/random.json"
       end
-      
+
       format.json do 
         render :partial => "minutes/random.json"
       end

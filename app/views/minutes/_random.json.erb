@@ -1,13 +1,1 @@
-{
-  "picture": {
-    "id" : <%= raw @picture.id.to_json %>,
-    "time" : <%= raw @minute.time.to_json %>,
-    "path" : <%= raw @picture.picture.url.to_json %>,
-    "top_x" : <%= raw @picture.top_x.to_json %>,
-    "top_y" : <%= raw @picture.top_y.to_json %>,
-    "bottom_x" : <%= raw @picture.bottom_x.to_json %>,
-    "bottom_y" : <%= raw @picture.bottom_y.to_json %>,
-    "location" : <%= raw @picture.location.to_json %>,
-    "uploader" : <%= raw @picture.uploader.to_json %>
-  }
-}
+<%= raw ActiveSupport::JSON.encode(@response) %>
