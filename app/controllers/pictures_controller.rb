@@ -1,4 +1,6 @@
 class PicturesController < ApplicationController
+  skip_before_filter :verify_authenticity_token, :only => [:create]
+  
   def new
     @picture = Picture.new
   end
@@ -7,7 +9,6 @@ class PicturesController < ApplicationController
     @minute = Minute.find_by_time(params[:time])
 
     if @minute
-      puts params[:picture].inspect
       @picture = @minute.pictures.create(params[:picture])
 
       redirect_to :action => 'edit', :id => @picture.id
