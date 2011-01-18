@@ -1,0 +1,11 @@
+body {
+  background-color: #000000;
+  color: #eeeeee;
+  font-size: 100%;
+  line-height: 1.6;
+  font-family: Arial;
+}
+
+#imageContainer {
+  border: 2px solid #eeeeee;
+}

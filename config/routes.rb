@@ -6,4 +6,6 @@ PicEachMinute::Application.routes.draw do
   end
 
   resources :pictures
+
+  root :to => 'high_voltage/pages#show', :id => 'clock'
 end
