@@ -28,19 +28,19 @@ var Clock = Class.create({
   tick: function() {
     console.log("Mathias");
     new Ajax.Request('/minutes/' + this.getTime() + '/random', {
-                method:'get',
-                requestHeaders: {Accept: 'application/json'},
-                onSuccess: function(transport) {
-                   var json = transport.responseText.evalJSON();
-                   console.log(json);
+      method:'get',
+      requestHeaders: {Accept: 'application/json'},
+      onSuccess: function(transport) {
+         var json = transport.responseText.evalJSON();
+         console.log(json);
 
-                   var picture = json.picture;
+         var picture = json.picture;
 
-                   //domImageContainer.style.width = picture.bottom_x - picture.top_x + 'px';
-                   //domImageContainer.style.height = picture.bottom_y - picture.top_y + 'px';
-                   this.imageBufferOne.style.background = 'url(/uploads/pictures/' + picture.path + ')';
-                   //domImageContainer.style.backgroundPosition = picture.top_x * -1 + 'px ' + picture.top_y * -1 + 'px';
-                }
-              });
+         //domImageContainer.style.width = picture.bottom_x - picture.top_x + 'px';
+         //domImageContainer.style.height = picture.bottom_y - picture.top_y + 'px';
+         this.imageBufferOne.style.background = 'url(' + picture.path + ')';
+         //domImageContainer.style.backgroundPosition = picture.top_x * -1 + 'px ' + picture.top_y * -1 + 'px';
+      }
+    });
   }
 });
