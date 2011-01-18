@@ -1,0 +1,14 @@
+Hello World
+
+<div id="imageContainer">
+
+<div id="imageBufferOne"></div>
+<div id="imageBufferTwo"></div>
+
+</div>
+
+<script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    var clock = new Clock('imageBufferOne', 'imageBufferTwo');
+  });
+</script>
