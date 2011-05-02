@@ -10,7 +10,7 @@ class MinutesController < ApplicationController
   def random
     @minute = Minute.find_by_time(params[:id])
 
-    @pictures = @minute.pictures.where("blame < 3")
+    @pictures = @minute.pictures.where("blames < 3")
 
     @picture = @pictures[rand(@pictures.length)]
     #@picture = @minute.pictures.where("blame < 3").first(:order => 'RANDOM()')
@@ -26,6 +26,7 @@ class MinutesController < ApplicationController
     @response['bottom_y'] = @picture.bottom_y
     @response['location'] = @picture.location
     @response['uploader'] = @picture.uploader
+    @response['blames'] = @picture.blames
 
     respond_to do |format|
       format.html do 
