@@ -10,11 +10,10 @@ class MinutesController < ApplicationController
   def random
     @minute = Minute.find_by_time(params[:id])
 
-    @pictures = @minute.pictures
+    @pictures = @minute.pictures.where("blame < 3")
 
     @picture = @pictures[rand(@pictures.length)]
-
-    #@picture = @minute.pictures.first(:order => 'RANDOM()')
+    #@picture = @minute.pictures.where("blame < 3").first(:order => 'RANDOM()')
 
     @response = Hash.new
 
