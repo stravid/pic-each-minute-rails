@@ -1,5 +1,5 @@
 class PicturesController < ApplicationController
-  skip_before_filter :verify_authenticity_token, :only => [:create]
+  skip_before_filter :verify_authenticity_token, :only => [:create, :update]
   
   def new
     @picture = Picture.new
